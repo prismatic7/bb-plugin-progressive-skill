@@ -56,7 +56,22 @@ skill.
 | `budgetChars` | `4600` | Max characters of the ranked skill list. ≈ 4 chars/token. |
 | `promoteScore` | `2.0` | A skill with decayed score ≥ this is ranked as promoted. |
 
+## Development
+
+```sh
+npm install
+npm run build      # tsc typecheck (noEmit)
+npm run bundle     # bb plugin build → dist/
+```
+
 ## Attribution
 
 The decision core is ported from the Hermes `progressive-skill` plugin
-(`core/` modules), which is MIT-licensed. See `LICENSE`.
+(`generic/core/` modules), version 3.2.1 (commit `0c84335`), which is
+MIT-licensed. See `LICENSE`.
+
+The tunables are upstream's defaults, unchanged: `decay_days` 30.0,
+`promote_score` 2.0, `list_budget_chars` 4600. What the port deliberately
+leaves out is upstream's prompt-rewriting half — the A/B/C category tiers and
+the names-only demotion — because BB has no `build_skills_system_prompt` to
+rewrite. The ranking decision is exposed as tools instead.
